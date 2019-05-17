@@ -28,7 +28,7 @@ typedef struct TaskScheduler_tag{
     Task *pTaskListRoot;
 } TaskScheduler;
 
-void InitializeTaskScheduler(uint32_t timerBase, uint16_t sysClkFreq, uint32_t timerIntBase);
+void InitializeTaskScheduler(uint32_t timerBase, uint32_t sysClkFreq, uint32_t timerIntBase);
 
 void AddTask(Task *pTask);
 void RemoveTask(Task *pTask);

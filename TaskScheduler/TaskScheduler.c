@@ -48,7 +48,7 @@ void TaskSchedulerTimer_ISR(void){
     TimerIntClear(scheduler.timerBase, TIMER_TIMA_TIMEOUT);
 }
 
-void InitializeTaskScheduler(uint32_t timerBase, uint16_t sysClkFreq, uint32_t timerIntBase){
+void InitializeTaskScheduler(uint32_t timerBase, uint32_t sysClkFreq, uint32_t timerIntBase){
     //Initialize the task scheduler
     scheduler.timerBase = timerBase;
     scheduler.pTaskListRoot = NULL;
