@@ -1,3 +1,6 @@
+//Project includes
+#include "TaskScheduler/TaskScheduler.h"
+
 //Standard includes
 #include <stdbool.h>
 #include <stdint.h>
@@ -6,6 +9,7 @@
 
 //Tivaware includes
 #include "inc/hw_memmap.h"
+#include "inc/hw_ints.h"
 #include "driverlib/gpio.h"
 #include "driverlib/rom.h"
 #include "driverlib/sysctl.h"
@@ -49,6 +53,13 @@ void EnableClock(void){
 */
 void EnablePeripherals(void){
     InitConsole();
+
+    InitializeTaskScheduler(TIMER0_BASE, SYS_CLK, INT_TIMER0A);
+
+    while(1){
+        UARTprintf("Hello world!");
+        SysCtlDelay(SYS_CLK / 3);
+    }
 }
 
 //Initializes UART0 to be used as a console.

@@ -1,10 +1,4 @@
 eclipse.preferences.version=1
-encoding//Debug/ControlLoop/subdir_rules.mk=UTF-8
-encoding//Debug/ControlLoop/subdir_vars.mk=UTF-8
-encoding//Debug/EIB/subdir_rules.mk=UTF-8
-encoding//Debug/EIB/subdir_vars.mk=UTF-8
-encoding//Debug/MotorDriver/subdir_rules.mk=UTF-8
-encoding//Debug/MotorDriver/subdir_vars.mk=UTF-8
 encoding//Debug/TaskScheduler/subdir_rules.mk=UTF-8
 encoding//Debug/TaskScheduler/subdir_vars.mk=UTF-8
 encoding//Debug/makefile=UTF-8
