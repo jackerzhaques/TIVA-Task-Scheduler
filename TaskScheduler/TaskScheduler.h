@@ -6,7 +6,7 @@
 
 //For the most accurate timer, choose a frequency that is an integer
 #define TASK_SCHEDULER_TIMER_PERIOD         100     //us
-#define TASK_SCHEDULER_TICKS_IN_ONE_SECOND  1/TASK_SCHEDULER_TIMER_PERIOD
+#define TASK_SCHEDULER_TICKS_IN_ONE_SECOND  1/TASK_SCHEDULER_TIMER_PERIOD * 1000000
 
 struct Task_tag;
 typedef struct Task_tag Task;
@@ -28,7 +28,7 @@ typedef struct TaskScheduler_tag{
     Task *pTaskListRoot;
 } TaskScheduler;
 
-void InitializeTaskScheduler(uint32_t timerBase, uint32_t sysClkFreq, uint32_t timerIntBase);
+void InitializeTaskScheduler(uint32_t timerBase, uint32_t sysCtlTimerPeriph, uint32_t sysClkFreq, uint32_t timerIntBase);
 
 void AddTask(Task *pTask);
 void RemoveTask(Task *pTask);
