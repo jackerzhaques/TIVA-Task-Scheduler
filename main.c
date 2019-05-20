@@ -1,5 +1,6 @@
 //Project includes
 #include "TaskScheduler/TaskScheduler.h"
+#include "TaskScheduler/PriorityQueue.h"
 
 //Standard includes
 #include <stdbool.h>
@@ -63,17 +64,20 @@ int main(void)
 
     InitializeTaskScheduler(TIMER0_BASE, SYSCTL_PERIPH_TIMER0, SYS_CLK, INT_TIMER0A);
 
-    tasks[0].period = 3;
+    tasks[0].period = 5;
     tasks[0].enabled = 1;
     tasks[0].pCallback = print;
+    tasks[0].priority = 2;
 
-    tasks[1].period = 1.5;
+    tasks[1].period = 30;
     tasks[1].enabled = 1;
     tasks[1].pCallback = print2;
+    tasks[1].priority = 1;
 
     tasks[2].period = 1;
     tasks[2].enabled = 1;
     tasks[2].pCallback = print3;
+    tasks[2].priority = 0;
 
     AddTask(&tasks[0]);
     AddTask(&tasks[1]);

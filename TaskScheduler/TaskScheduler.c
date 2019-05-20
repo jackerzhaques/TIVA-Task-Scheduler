@@ -1,5 +1,6 @@
 //Project includes
 #include "TaskScheduler.h"
+#include "PriorityQueue.h"
 
 //Tivaware includes
 #include <driverlib/sysctl.h>
@@ -13,7 +14,11 @@
     #define NULL 0
 #endif
 
-static volatile TaskScheduler scheduler;
+static volatile TaskScheduler   scheduler;
+
+//Does not need to be volatile because it is only used in the ISR
+static PriorityQueue   queue;
+static PriorityQueue*           pqueue;
 
 /*
  * Timer ISR for the task scheduler
@@ -34,18 +39,20 @@ void TaskSchedulerTimer_ISR(void){
             if(pTask->ticks >= pTask->maxTicks){
                 pTask->ticks = 0;
 
-                //Add task to priority queue
-                //TODO: Implement priority queue
-                pTask->pCallback();
+                AddTaskToQueue(pqueue, pTask);
             }
         }
         else{
-            //Do nothing
+            //Do nothing, but reset the ticks
+            pTask->ticks = 0;
         }
 
         //Move to next task
         pTask = pTask->pNextTask;
     }
+
+    //Run all pending tasks
+    RunAllTasks(pqueue);
 
     TimerIntClear(scheduler.timerBase, TIMER_TIMA_TIMEOUT);
 }
@@ -54,6 +61,10 @@ void InitializeTaskScheduler(uint32_t timerBase, uint32_t sysCtlTimerPeriph, uin
     //Initialize the task scheduler
     scheduler.timerBase = timerBase;
     scheduler.pTaskListRoot = NULL;
+
+    //Initialize the priority queue
+    pqueue = &queue;
+    InitializeQueue(pqueue);
 
     //Initialize the timer
     SysCtlPeripheralEnable(sysCtlTimerPeriph);
