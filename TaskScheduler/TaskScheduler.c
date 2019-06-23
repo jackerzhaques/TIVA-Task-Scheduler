@@ -76,10 +76,10 @@ void InitializeTaskScheduler(uint32_t timerBase, uint32_t sysCtlTimerPeriph, uin
     //Configure the timer to be a periodic 100us timer
     TimerConfigure(timerBase, TIMER_CFG_PERIODIC);
 
-    TimerLoadSet(timerBase, TIMER_A, sysClkFreq * TASK_SCHEDULER_TIMER_PERIOD / 1000000);
+    TimerLoadSet(timerBase, TIMER_A, sysClkFreq * (TASK_SCHEDULER_TIMER_PERIOD / 1000000.0f));
 
     //Configure the ISR
-    TimerIntRegister(timerBase, TIMER_BOTH, TaskSchedulerTimer_ISR);
+    TimerIntRegister(timerBase, TIMER_A, TaskSchedulerTimer_ISR);
     IntEnable(timerIntBase);
     TimerIntEnable(timerBase, TIMER_TIMA_TIMEOUT);
 

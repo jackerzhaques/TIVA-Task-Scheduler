@@ -5,8 +5,8 @@
 #include <stdbool.h>
 
 //For the most accurate timer, choose a frequency that is an integer
-#define TASK_SCHEDULER_TIMER_PERIOD         100     //us
-#define TASK_SCHEDULER_TICKS_IN_ONE_SECOND  1/TASK_SCHEDULER_TIMER_PERIOD * 1000000
+#define TASK_SCHEDULER_TIMER_PERIOD         100.0f     //us
+#define TASK_SCHEDULER_TICKS_IN_ONE_SECOND  1.0f/TASK_SCHEDULER_TIMER_PERIOD * 1000000.0f
 
 struct Task_tag;
 typedef struct Task_tag Task;
